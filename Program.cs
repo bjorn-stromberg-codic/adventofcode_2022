@@ -37,13 +37,15 @@
             Us: p[1][0] - 'X'
         ));
 
+    var score = (int us, int they) => 1 + us + (us - they) switch
+    {
+        2 or -1 => 0,
+        0 => 3,
+        _ => 6,
+    };
+
     var result_1 = plays
-        .Sum(p => 1 + p.Us + (p.Us - p.They) switch
-        {
-            2 or -1 => 0,
-            0 => 3,
-            _ => 6,
-        });
+        .Sum(p => score(p.Us, p.They));
 
     var result_2 = plays
         .Select(p => (
@@ -55,12 +57,43 @@
                 _ => (p.They + 1) % 3
             }
         ))
-        .Sum(p => 1 + p.Us + (p.Us - p.They) switch
-        {
-            2 or -1 => 0,
-            0 => 3,
-            _ => 6,
-        });
+        .Sum(p => score(p.Us, p.They));
+
+    Console.WriteLine($"Day 2 answers: {result_1}, {result_2}");
+}
+
+{
+    var text = File.ReadAllText("input/day3.txt");
+
+    var plays = text
+        .Split("\n")
+        .Select(l => l.Split())
+        .Select(p => (
+            They: p[0][0] - 'A',
+            Us: p[1][0] - 'X'
+        ));
+
+    var score = (int us, int they) => 1 + us + (us - they) switch
+    {
+        2 or -1 => 0,
+        0 => 3,
+        _ => 6,
+    };
+
+    var result_1 = plays
+        .Sum(p => score(p.Us, p.They));
+
+    var result_2 = plays
+        .Select(p => (
+            They: p.They,
+            Us: p.Us switch
+            {
+                0 => (p.They + 2) % 3,
+                1 => p.They,
+                _ => (p.They + 1) % 3
+            }
+        ))
+        .Sum(p => score(p.Us, p.They));
 
     Console.WriteLine($"Day 2 answers: {result_1}, {result_2}");
 }
