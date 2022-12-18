@@ -98,6 +98,40 @@
     Console.WriteLine($"Day 3 answers: {result_1}, {result_2}");
 }
 
+{
+    var text = File.ReadAllText("input/day4.txt");
+
+    var pairs = text
+        .Split("\n")
+        .Select(l => l
+            .Split(",")
+            .Select(s => s
+                .Split("-")
+                .Select(int.Parse))
+            .Select(s => (
+                From: s.First(),
+                To: s.Last()
+            )))
+        .Select(s =>
+        (
+            First: s.First(),
+            Second: s.Last()
+        ));
+
+    bool Contains((int From, int To) a, (int From, int To) b) =>
+        a.From <= b.From && b.To <= a.To;
+
+    var result_1 = pairs
+        .Where(p => Contains(p.First, p.Second) || Contains(p.Second, p.First))
+        .Count();
+
+    var result_2 = pairs
+        .Where(p => p.First.From <= p.Second.To && p.First.To >= p.Second.From)
+        .Count();
+
+    Console.WriteLine($"Day 4 answers: {result_1}, {result_2}");
+}
+
 static class IEnumerableExtensions
 {
     public static IEnumerable<T> Do<T>(this IEnumerable<T> enumerable, int count, Action<T> action)
