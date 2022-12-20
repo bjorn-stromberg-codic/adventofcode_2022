@@ -1,4 +1,4 @@
 internal partial class Solution
 {
-    public delegate (dynamic, dynamic) Day(IEnumerable<string> lines);
+    public delegate (dynamic, dynamic) DailySolution(IEnumerable<string> lines);
 }

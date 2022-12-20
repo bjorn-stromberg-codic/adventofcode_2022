@@ -1,6 +1,6 @@
 internal partial class Solution
 {
-    public static Day Day1 = lines =>
+    public static DailySolution Day1 = lines =>
     {
         var elfs = lines
             .Select(l => string.IsNullOrWhiteSpace(l) ? (int?)null : int.Parse(l))

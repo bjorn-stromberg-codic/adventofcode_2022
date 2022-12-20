@@ -1,11 +1,12 @@
-﻿using System.Reflection;
-using System.Text.RegularExpressions;
+﻿global using System.Text.RegularExpressions;
+
+using System.Reflection;
 
 var solutions = typeof(Solution)
     .GetFields(BindingFlags.Static | BindingFlags.Public)
     .Select(field => (
         day: int.Parse(Regex.Match(field.Name, @"(\d+)$").Value),
-        _: field.GetValue(null) as Solution.Day
+        _: field.GetValue(null) as Solution.DailySolution
     ))
     .OrderBy(one => one.day);
 

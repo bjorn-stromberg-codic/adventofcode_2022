@@ -1,6 +1,6 @@
 internal partial class Solution
 {
-    public static Day Day4 = lines =>
+    public static DailySolution Day4 = lines =>
     {
         var pairs = lines
             .Select(l => l

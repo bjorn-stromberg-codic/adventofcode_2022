@@ -1,6 +1,6 @@
 internal partial class Solution
 {
-    public static Day Day3 = rugsacks =>
+    public static DailySolution Day3 = rugsacks =>
     {
         var priority = (char c) =>
             c switch
