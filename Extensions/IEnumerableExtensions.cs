@@ -12,4 +12,6 @@ static class IEnumerableExtensions
             action(v);
         return enumerable;
     }
+    public static string AggregateToString<T>(this IEnumerable<T> enumerable)
+        => enumerable.Aggregate("", (a, b) => a + b);
 }
